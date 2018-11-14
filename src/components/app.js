@@ -1,7 +1,8 @@
 import React from 'react'
-import Todos from './components/todos'
-import Input from './components/input'
-import Filter from './components/filter'
+import Todos from './todos'
+import Input from './input'
+import Filter from './filter'
+import Header from './header'
 
 const todos = [
   {
@@ -16,11 +17,9 @@ const todos = [
 
 const App = () => (
   <div>
-    <h1>Todo list</h1>
-    <div>
+      <Header />
       <Input />
       <Filter />
-    </div>
     <Todos todolist={todos}/>
   </div>
 )

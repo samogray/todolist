@@ -1,0 +1,17 @@
+.todo-item {
+  display: flex;
+
+  &__label {
+
+    &--active {
+      text-decoration: line-through;
+    }
+
+    &--important {
+      color: blueviolet;
+      font-weight: 600;
+    }
+
+  }
+  
+}
