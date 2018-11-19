@@ -11,7 +11,7 @@ class TodoItem extends React.Component {
   toggleImportant = () => this.setState(state => ({important: !state.important}))
 
   render() {
-    const {label} = this.props
+    const {label, handleRemoveItem,} = this.props
     const {done, important} = this.state
     return (
       <li className="todo-item">
@@ -26,7 +26,7 @@ class TodoItem extends React.Component {
         >
           {label}
         </button>
-        <button type="button">{'\u{2796}'}</button>
+        <button type="button" onClick={handleRemoveItem}>-</button>
         <button type="button" onClick={this.toggleImportant}>
           {'\u{1F6C2}'}
         </button>
