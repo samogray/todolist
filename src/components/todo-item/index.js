@@ -2,18 +2,8 @@ import React from 'react'
 import classNames from 'classnames'
 import './todo-item.scss'
 
-class TodoItem extends React.Component {
-  state = {
-    done: false
-  }
-
-  toggleDone = () => this.setState(state => ({done: !state.done}))
-  toggleImportant = () => this.setState(state => ({important: !state.important}))
-
-  render() {
-    const {label, handleRemoveItem,} = this.props
-    const {done, important} = this.state
-    return (
+const  TodoItem = ({label, handleRemoveItem, toggleDone, toggleImportant, done, important})=> {
+   return (
       <li className="todo-item">
         <button
           className={classNames(
@@ -22,17 +12,16 @@ class TodoItem extends React.Component {
             important && 'todo-item__label--important'
           )}
           type="button"
-          onClick={this.toggleDone}
+          onClick={toggleDone}
         >
           {label}
         </button>
         <button type="button" onClick={handleRemoveItem}>-</button>
-        <button type="button" onClick={this.toggleImportant}>
+        <button type="button" onClick={toggleImportant}>
           {'\u{1F6C2}'}
         </button>
       </li>
     )
-  }
 }
 
 export default TodoItem
