@@ -1,13 +1,13 @@
 import React from 'react'
 
-const Header = () => (
+const Header = ({done, active, important}) => (
   <header>
-   <h1>Todo list</h1>
-   <p>
-     <span>1 task done</span>
-     <span>2 task active</span>
-     <span>2 tasks</span>
-   </p>
+    <h1>Todo list</h1>
+    <ul>
+      <li>{active} active</li>
+      <li>{important} important</li>
+      <li>{done} done</li>
+    </ul>
   </header>
 )
 

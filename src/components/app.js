@@ -28,7 +28,8 @@ class App extends React.Component {
         done: false,
         important: false,
       }
-    ]
+    ],
+    filter: 'all',
   }
 
   handleRemoveItem = (idItem) => {
@@ -43,6 +44,8 @@ class App extends React.Component {
         return {todos: newTodos}
     })
   }
+
+  onFilterChange = (filter) => this.setState({filter})
 
   toggleProperty = (idItem, property) => {
     const {todos} = this.state
@@ -61,15 +64,41 @@ class App extends React.Component {
 
   toggleImportant = (idItem) => this.toggleProperty(idItem, 'important')
 
-  render() {
+  getDoneItem = () => this.state.todos.filter(({done}) => done).length
+
+  getActiveItem = () => this.state.todos.filter(({done}) => !done).length
+
+  getImportantItem = () => this.state.todos.filter(({important}) => important).length
+
+  filterTodos = (items, filter) => {
     const {todos} = this.state
+    switch (filter) {
+      case "done":
+        return items.filter(({done}) => done)
+      case "active":
+        return items.filter(({done}) => !done)
+      case 'important':
+        return items.filter(({important}) => important)
+      case 'all':
+        return items
+      default:
+        return todos
+    }
+  }
+
+  render() {
+    const {todos, filter} = this.state
     return (
       <div>
-        <Header />
+        <Header
+          done={this.getDoneItem()}
+          active={this.getActiveItem()}
+          important={this.getImportantItem()}
+        />
         <Input />
-        <Filter />
+        <Filter filter={filter} onFilterChange={this.onFilterChange}/>
         <Todos
-          todolist={todos}
+          todolist={this.filterTodos(todos, filter)}
           handleRemoveItem={this.handleRemoveItem}
           toggleDone={this.toggleDone}
           toggleImportant={this.toggleImportant}
