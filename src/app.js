@@ -1,35 +1,21 @@
 import React from 'react'
-import Todos from './todos'
-import Input from './input'
-import Filter from './filter'
-import Header from './header'
-import AddItem from './add-item'
+import {
+  AddItem,
+  Header,
+  Filter,
+  SearchInput,
+  Todos} from './components'
+import mockData from './utils/mock-state'
+import filterTodos from './utils/filter-data'
+import searchFilter from './utils/search-filter'
 import uid from 'uid'
 
 
 class App extends React.Component {
   state= {
-    todos: [
-      {
-        id: uid(),
-        label: 'learn redux',
-        done: false,
-        important: false,
-      },
-      {
-        id: uid(),
-        label: 'learn malakies',
-        done: false,
-        important: false,
-      },
-      {
-        id: uid(),
-        label: 'learn diving',
-        done: false,
-        important: false,
-      }
-    ],
+    todos: mockData,
     filter: 'all',
+    term: '',
   }
 
   handleRemoveItem = (idItem) => {
@@ -70,24 +56,12 @@ class App extends React.Component {
 
   getImportantItem = () => this.state.todos.filter(({important}) => important).length
 
-  filterTodos = (items, filter) => {
-    const {todos} = this.state
-    switch (filter) {
-      case "done":
-        return items.filter(({done}) => done)
-      case "active":
-        return items.filter(({done}) => !done)
-      case 'important':
-        return items.filter(({important}) => important)
-      case 'all':
-        return items
-      default:
-        return todos
-    }
-  }
+  onSearchChange = (term) => this.setState({term})
 
   render() {
-    const {todos, filter} = this.state
+    const {todos, filter, term} = this.state
+    const visibleItems = searchFilter(todos, term)
+    console.log(term)
     return (
       <div>
         <Header
@@ -95,10 +69,10 @@ class App extends React.Component {
           active={this.getActiveItem()}
           important={this.getImportantItem()}
         />
-        <Input />
+        <SearchInput onSearchChange={this.onSearchChange}/>
         <Filter filter={filter} onFilterChange={this.onFilterChange}/>
         <Todos
-          todolist={this.filterTodos(todos, filter)}
+          todolist={filterTodos(visibleItems, filter)}
           handleRemoveItem={this.handleRemoveItem}
           toggleDone={this.toggleDone}
           toggleImportant={this.toggleImportant}
