@@ -1,9 +1,10 @@
 import React from 'react'
 import TodoItem from '../todo-item'
+import './todos.css'
 
 const Todos = ({todolist, handleRemoveItem, toggleDone, toggleImportant}) => {
   return (
-    <ul>
+    <ul className="todo-list">
       {todolist.map(({id, label, done, important}) => (
         <TodoItem
           label={label}

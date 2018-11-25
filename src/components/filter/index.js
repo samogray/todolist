@@ -15,7 +15,7 @@ const btns = [
 
 const Filter = ({filter, onFilterChange}) => {
   return (
-    <div>
+    <div className="btn-group">
       {btns.map(({label, name}) => <button
         type="button"
         key={name}

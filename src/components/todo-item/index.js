@@ -1,8 +1,14 @@
 import React from 'react'
 import classNames from 'classnames'
-import './todo-item.scss'
+import './item.css'
 
-const  TodoItem = ({label, handleRemoveItem, toggleDone, toggleImportant, done, important})=> {
+const  TodoItem = ({
+  label,
+  handleRemoveItem,
+  toggleDone,
+  toggleImportant,
+  done,
+  important}) => {
    return (
       <li className="todo-item">
         <button
@@ -16,9 +22,9 @@ const  TodoItem = ({label, handleRemoveItem, toggleDone, toggleImportant, done, 
         >
           {label}
         </button>
-        <button type="button" onClick={handleRemoveItem}>-</button>
-        <button type="button" onClick={toggleImportant}>
-          {'\u{1F6C2}'}
+        <button type="button" onClick={handleRemoveItem} className="todo-item__btn">➖</button>
+        <button type="button" onClick={toggleImportant} className="todo-item__btn">
+        ❗
         </button>
       </li>
     )

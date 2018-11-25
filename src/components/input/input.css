@@ -1,0 +1,10 @@
+.input {
+  flex: 1;
+  border-radius: 3px;
+  margin-right: 4px;
+  padding: 0 12px;
+}
+
+.input--add {
+  height: 30px;
+}

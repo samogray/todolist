@@ -10,6 +10,7 @@ import filterTodos from './utils/filter-data'
 import searchFilter from './utils/search-filter'
 import uid from 'uid'
 
+import './components/todos.css'
 
 class App extends React.Component {
   state= {
@@ -63,14 +64,16 @@ class App extends React.Component {
     const visibleItems = searchFilter(todos, term)
     console.log(term)
     return (
-      <div>
+      <div className="todos">
         <Header
           done={this.getDoneItem()}
           active={this.getActiveItem()}
           important={this.getImportantItem()}
         />
-        <SearchInput onSearchChange={this.onSearchChange}/>
-        <Filter filter={filter} onFilterChange={this.onFilterChange}/>
+        <div className="filter-wrapper">
+          <SearchInput onSearchChange={this.onSearchChange}/>
+          <Filter filter={filter} onFilterChange={this.onFilterChange}/>
+        </div>
         <Todos
           todolist={filterTodos(visibleItems, filter)}
           handleRemoveItem={this.handleRemoveItem}
